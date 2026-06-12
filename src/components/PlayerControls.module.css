@@ -1,0 +1,35 @@
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ctrl {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 6px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: color 0.15s, background 0.15s;
+}
+.ctrl svg { width: 18px; height: 18px; }
+.ctrl:hover { color: var(--text); background: #fce7f3; }
+.ctrl.active { color: var(--pink); }
+.ctrl.nav svg { width: 22px; height: 22px; }
+
+.playBtn {
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, var(--pink), var(--lavender));
+  color: white;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 18px rgba(200, 130, 180, 0.4);
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+.playBtn svg { width: 24px; height: 24px; }
+.playBtn:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(200, 130, 180, 0.52); }
+.playBtn:active { transform: scale(0.96); }

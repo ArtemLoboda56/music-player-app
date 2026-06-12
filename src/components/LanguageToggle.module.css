@@ -1,0 +1,27 @@
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: white;
+  border: 1.5px solid #f0d0e8;
+  border-radius: 20px;
+  padding: 4px 12px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.btn:hover {
+  border-color: var(--pink);
+  box-shadow: 0 2px 8px var(--shadow);
+}
+.option {
+  color: var(--muted);
+  font-weight: 400;
+  transition: color 0.15s, font-weight 0.15s;
+}
+.option.active {
+  color: var(--text);
+  font-weight: 600;
+}
+.sep { color: #d8c0d8; }

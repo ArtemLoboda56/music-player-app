@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --pink:       #f9a8d4;
+  --lavender:   #c4b5fd;
+  --bg:         #fdf4f9;
+  --sidebar-bg: #fff8fc;
+  --text:       #3b2a3a;
+  --muted:      #a78ba0;
+  --active-bg:  #fce7f3;
+  --shadow:     rgba(180, 120, 160, 0.15);
+}
+
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); }
+
+.app {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* ── PLAYER ── */
+.player {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 24px 20px 32px;
+  position: relative;
+}
+
+.topBar {
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
+}
+
+.vibesTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text);
+}
+
+/* ── COVER ── */
+.coverWrap {
+  position: relative;
+  width: 220px; height: 220px;
+}
+.coverWrap.spinning .coverImg,
+.coverWrap.spinning svg { animation: spin 12s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.coverImg {
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 12px 40px rgba(200, 130, 180, 0.28);
+}
+.coverGlow {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  opacity: 0.18;
+  filter: blur(28px);
+  z-index: -1;
+}
+
+/* ── NOW PLAYING ── */
+.nowPlaying { text-align: center; }
+.npTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem; font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.npArtist {
+  font-size: 0.85rem; color: var(--muted);
+  font-weight: 300; letter-spacing: 0.03em;
+}
