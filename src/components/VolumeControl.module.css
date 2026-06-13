@@ -25,7 +25,7 @@
     to right,
     var(--lavender) 0%,
     var(--lavender) var(--pct, 80%),
-    #e8d8f0 var(--pct, 80%)
+    var(--input-border) var(--pct, 80%)
   );
   cursor: pointer;
   outline: none;
@@ -34,7 +34,7 @@
   -webkit-appearance: none;
   width: 13px; height: 13px;
   border-radius: 50%;
-  background: white;
+  background: var(--sidebar-bg);
   border: 2px solid var(--lavender);
   box-shadow: 0 1px 4px var(--shadow);
   cursor: pointer;

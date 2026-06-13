@@ -13,6 +13,7 @@
   min-width: 30px;
 }
 
+/* Fallback range slider */
 .bar {
   flex: 1;
   -webkit-appearance: none;
@@ -22,7 +23,7 @@
     to right,
     var(--pink) 0%,
     var(--pink) var(--pct, 0%),
-    #f0e0ec var(--pct, 0%)
+    var(--border) var(--pct, 0%)
   );
   cursor: pointer;
   outline: none;
@@ -31,10 +32,35 @@
   -webkit-appearance: none;
   width: 14px; height: 14px;
   border-radius: 50%;
-  background: white;
+  background: var(--sidebar-bg);
   border: 2px solid var(--pink);
   box-shadow: 0 1px 4px var(--shadow);
   cursor: pointer;
   transition: transform 0.15s;
 }
 .bar:hover::-webkit-slider-thumb { transform: scale(1.3); }
+
+/* Waveform */
+.waveWrap {
+  flex: 1;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  cursor: pointer;
+  position: relative;
+}
+.waveBar {
+  flex: 1;
+  min-width: 1px;
+  border-radius: 2px;
+  transition: background 0.1s;
+}
+.hiddenRange {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+}

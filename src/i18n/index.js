@@ -4,16 +4,13 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
   en: {
     translation: {
-      // App
       appTitle: 'Vibes',
-      // Sidebar
       library: 'Library',
       search: 'Search tracks...',
       allGenres: 'All Genres',
       noTracks: 'No tracks found',
-      // Player
       noTrackSelected: 'Select a track',
-      // Controls
+
       shuffle: 'Shuffle',
       previous: 'Previous',
       play: 'Play',
@@ -23,7 +20,7 @@ const resources = {
       repeatOne: 'Repeat one',
       repeatAll: 'Repeat all',
       volume: 'Volume',
-      // Modal
+
       addTrack: 'Add Track',
       addCover: 'Add Cover',
       trackTitle: 'Track title *',
@@ -34,20 +31,33 @@ const resources = {
       cancel: 'Cancel',
       add: 'Add',
       accentColor: 'Accent color',
-      // Genres
+      lyricsPlaceholder: 'Lyrics / description (optional)',
+      dragHint: 'You can also drag & drop audio or image files here',
+      dropHere: 'Drop audio or image here',
+
       genres: {
-        pop: 'Pop',
-        rock: 'Rock',
-        jazz: 'Jazz',
-        electronic: 'Electronic',
-        classical: 'Classical',
-        hiphop: 'Hip-Hop',
-        rnb: 'R&B',
-        lofi: 'Lo-Fi',
-        ambient: 'Ambient',
-        other: 'Other',
+        pop: 'Pop', rock: 'Rock', jazz: 'Jazz', electronic: 'Electronic',
+        classical: 'Classical', hiphop: 'Hip-Hop', rnb: 'R&B',
+        lofi: 'Lo-Fi', ambient: 'Ambient', other: 'Other',
       },
-      // Language toggle
+
+      sort: {
+        default: 'Date added', title: 'Title', artist: 'Artist', genre: 'Genre',
+      },
+      sortBy: 'Sort by',
+
+      allTracks: 'All Tracks',
+      playlist: 'Playlist',
+      playlists: 'Playlists',
+      newPlaylist: 'New playlist',
+      playlistName: 'Playlist name',
+      addToPlaylist: 'Add to playlist',
+      noPlaylists: 'No playlists yet',
+
+      showLyrics: 'Show lyrics',
+      hideLyrics: 'Hide lyrics',
+      hasLyrics: 'Has lyrics',
+
       language: 'Language',
     },
   },
@@ -59,6 +69,7 @@ const resources = {
       allGenres: 'Всі жанри',
       noTracks: 'Треки не знайдено',
       noTrackSelected: 'Оберіть трек',
+
       shuffle: 'Перемішати',
       previous: 'Попередній',
       play: 'Грати',
@@ -68,6 +79,7 @@ const resources = {
       repeatOne: 'Повтор одного',
       repeatAll: 'Повтор всіх',
       volume: 'Гучність',
+
       addTrack: 'Додати трек',
       addCover: 'Додати обкладинку',
       trackTitle: 'Назва треку *',
@@ -78,18 +90,33 @@ const resources = {
       cancel: 'Скасувати',
       add: 'Додати',
       accentColor: 'Колір акценту',
+      lyricsPlaceholder: 'Текст пісні / опис (необов’язково)',
+      dragHint: 'Також можна перетягнути аудіо чи зображення сюди',
+      dropHere: 'Кидай аудіо чи зображення тут',
+
       genres: {
-        pop: 'Поп',
-        rock: 'Рок',
-        jazz: 'Джаз',
-        electronic: 'Електронна',
-        classical: 'Класична',
-        hiphop: 'Хіп-Хоп',
-        rnb: 'R&B',
-        lofi: 'Ло-Фай',
-        ambient: 'Амбієнт',
-        other: 'Інше',
+        pop: 'Поп', rock: 'Рок', jazz: 'Джаз', electronic: 'Електронна',
+        classical: 'Класична', hiphop: 'Хіп-Хоп', rnb: 'R&B',
+        lofi: 'Ло-Фай', ambient: 'Амбієнт', other: 'Інше',
       },
+
+      sort: {
+        default: 'Дата додавання', title: 'Назва', artist: 'Артист', genre: 'Жанр',
+      },
+      sortBy: 'Сортування',
+
+      allTracks: 'Всі треки',
+      playlist: 'Плейлист',
+      playlists: 'Плейлисти',
+      newPlaylist: 'Новий плейлист',
+      playlistName: 'Назва плейлиста',
+      addToPlaylist: 'Додати в плейлист',
+      noPlaylists: 'Поки немає плейлистів',
+
+      showLyrics: 'Показати текст',
+      hideLyrics: 'Сховати текст',
+      hasLyrics: 'Є текст',
+
       language: 'Мова',
     },
   },

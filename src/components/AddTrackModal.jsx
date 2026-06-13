@@ -4,41 +4,80 @@ import GradientCover from './GradientCover';
 import { GENRE_KEYS, ACCENT_COLORS } from '../data/tracks';
 import styles from './AddTrackModal.module.css';
 
-const EMPTY = { title: '', artist: '', genre: 'other', cover: null, file: null, color: '#f9a8d4' };
+const EMPTY = { title: '', artist: '', genre: 'other', lyrics: '', color: '#f9a8d4' };
 
 export default function AddTrackModal({ onClose, onAdd }) {
   const { t } = useTranslation();
-  const [form, setForm]             = useState(EMPTY);
+  const [form, setForm]                 = useState(EMPTY);
   const [coverPreview, setCoverPreview] = useState(null);
+  const [coverBlob, setCoverBlob]       = useState(null);
+  const [fileBlob, setFileBlob]         = useState(null);
+  const [fileName, setFileName]         = useState(null);
+  const [dragOver, setDragOver]         = useState(null); // 'cover' | 'audio' | 'any' | null
+
   const fileRef  = useRef(null);
   const coverRef = useRef(null);
 
   const set = (key, val) => setForm(p => ({ ...p, [key]: val }));
 
-  const handleCover = e => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const url = URL.createObjectURL(file);
-    setCoverPreview(url);
-    set('cover', url);
+  const acceptCover = (file) => {
+    if (!file || !file.type.startsWith('image/')) return false;
+    setCoverBlob(file);
+    setCoverPreview(URL.createObjectURL(file));
+    return true;
   };
 
-  const handleAudio = e => {
-    const file = e.target.files[0];
-    if (!file) return;
-    set('file', URL.createObjectURL(file));
+  const acceptAudio = (file) => {
+    if (!file || !file.type.startsWith('audio/')) return false;
+    setFileBlob(file);
+    setFileName(file.name);
+    if (!form.title.trim()) {
+      const guess = file.name.replace(/\.[^.]+$/, '');
+      set('title', guess);
+    }
+    return true;
   };
+
+  const handleCoverInput  = e => acceptCover(e.target.files[0]);
+  const handleAudioInput  = e => acceptAudio(e.target.files[0]);
+
+  // Generic drop zone covering whole modal: route by file type
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setDragOver(null);
+    const files = Array.from(e.dataTransfer.files || []);
+    for (const f of files) {
+      if (f.type.startsWith('image/')) acceptCover(f);
+      else if (f.type.startsWith('audio/')) acceptAudio(f);
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    setDragOver('any');
+  };
+  const handleDragLeave = () => setDragOver(null);
 
   const submit = () => {
     if (!form.title.trim()) return;
-    onAdd(form);
+    onAdd({ ...form, fileBlob, coverBlob });
     onClose();
   };
 
   return (
     <div className={styles.overlay} onClick={onClose}>
-      <div className={styles.modal} onClick={e => e.stopPropagation()}>
+      <div
+        className={`${styles.modal} ${dragOver ? styles.dragActive : ''}`}
+        onClick={e => e.stopPropagation()}
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+      >
         <h2 className={styles.heading}>{t('addTrack')}</h2>
+
+        {dragOver && (
+          <div className={styles.dropOverlay}>{t('dropHere')}</div>
+        )}
 
         {/* Cover picker */}
         <div className={styles.coverRow}>
@@ -48,7 +87,7 @@ export default function AddTrackModal({ onClose, onAdd }) {
               : <GradientCover color={form.color} title={form.title || '?'} size={80} />
             }
             <span className={styles.coverLabel}>{t('addCover')}</span>
-            <input ref={coverRef} type="file" accept="image/*" hidden onChange={handleCover} />
+            <input ref={coverRef} type="file" accept="image/*" hidden onChange={handleCoverInput} />
           </div>
 
           <div className={styles.colorGrid}>
@@ -74,12 +113,25 @@ export default function AddTrackModal({ onClose, onAdd }) {
           ))}
         </select>
 
+        {/* Lyrics */}
+        <textarea
+          className={styles.textarea}
+          placeholder={t('lyricsPlaceholder')}
+          value={form.lyrics}
+          onChange={e => set('lyrics', e.target.value)}
+          rows={3}
+        />
+
         {/* Audio file */}
         <button className={styles.fileBtn} onClick={() => fileRef.current.click()}>
-          {form.file ? t('audioSelected') : t('chooseAudio')}
-          <span className={styles.fileMeta}>{form.file ? '🎵' : '📁'}</span>
+          <span className={styles.fileBtnText}>
+            {fileName ? `🎵 ${fileName}` : t('chooseAudio')}
+          </span>
+          <span className={styles.fileMeta}>{fileBlob ? '✓' : '📁'}</span>
         </button>
-        <input ref={fileRef} type="file" accept="audio/*" hidden onChange={handleAudio} />
+        <input ref={fileRef} type="file" accept="audio/*" hidden onChange={handleAudioInput} />
+
+        <p className={styles.hint}>{t('dragHint')}</p>
 
         <div className={styles.actions}>
           <button className={styles.cancel} onClick={onClose}>{t('cancel')}</button>

@@ -9,7 +9,7 @@
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 .modal {
-  background: white;
+  background: var(--sidebar-bg);
   border-radius: 24px;
   padding: 26px 26px 22px;
   width: 340px;
@@ -17,6 +17,26 @@
   box-shadow: 0 20px 60px rgba(100, 50, 100, 0.22);
   animation: up 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: flex; flex-direction: column; gap: 12px;
+  position: relative;
+  transition: outline 0.15s;
+}
+.dragActive {
+  outline: 2px dashed var(--pink);
+  outline-offset: -4px;
+}
+.dropOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(249, 168, 212, 0.18);
+  backdrop-filter: blur(2px);
+  border-radius: 24px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  color: var(--text);
+  font-size: 0.95rem;
+  pointer-events: none;
+  z-index: 5;
 }
 @keyframes up { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
 
@@ -35,7 +55,7 @@
 .coverPick {
   width: 80px; height: 80px;
   border-radius: 14px;
-  border: 2px dashed #f0d0e8;
+  border: 2px dashed var(--input-border);
   cursor: pointer;
   overflow: hidden;
   position: relative;
@@ -74,7 +94,7 @@
 .input {
   width: 100%;
   padding: 9px 13px;
-  border: 1.5px solid #f0d0e8;
+  border: 1.5px solid var(--input-border);
   border-radius: 10px;
   font-family: 'DM Sans', sans-serif;
   font-size: 0.87rem;
@@ -88,12 +108,12 @@
 .select {
   width: 100%;
   padding: 9px 13px;
-  border: 1.5px solid #f0d0e8;
+  border: 1.5px solid var(--input-border);
   border-radius: 10px;
   font-family: 'DM Sans', sans-serif;
   font-size: 0.87rem;
   color: var(--text);
-  background: white;
+  background: var(--sidebar-bg);
   outline: none;
   cursor: pointer;
   appearance: none;
@@ -107,7 +127,7 @@
 .fileBtn {
   width: 100%;
   padding: 9px 13px;
-  border: 1.5px dashed #d8b8e0;
+  border: 1.5px dashed var(--input-border);
   border-radius: 10px;
   background: none;
   font-family: 'DM Sans', sans-serif;
@@ -115,17 +135,44 @@
   color: var(--muted);
   cursor: pointer;
   display: flex; align-items: center; justify-content: space-between;
+  gap: 8px;
   transition: border-color 0.15s, color 0.15s;
 }
 .fileBtn:hover { border-color: var(--lavender); color: var(--text); }
-.fileMeta { font-size: 1rem; }
+.fileBtnText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fileMeta { font-size: 1rem; flex-shrink: 0; }
+
+.textarea {
+  width: 100%;
+  padding: 9px 13px;
+  border: 1.5px solid var(--input-border);
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.83rem;
+  color: var(--text);
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.15s;
+}
+.textarea:focus { border-color: var(--pink); }
+.textarea::placeholder { color: var(--muted); }
+
+.hint {
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-align: center;
+}
 
 .actions { display: flex; gap: 10px; }
 
 .cancel {
   flex: 1; padding: 10px;
   border-radius: 12px;
-  border: 1.5px solid #f0d0e8;
+  border: 1.5px solid var(--input-border);
   background: none;
   font-family: 'DM Sans', sans-serif;
   font-size: 0.87rem;
@@ -133,7 +180,7 @@
   cursor: pointer;
   transition: background 0.15s;
 }
-.cancel:hover { background: #fdf0f7; }
+.cancel:hover { background: var(--active-bg); }
 
 .confirm {
   flex: 1; padding: 10px;

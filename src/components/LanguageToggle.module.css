@@ -2,8 +2,8 @@
   display: flex;
   align-items: center;
   gap: 3px;
-  background: white;
-  border: 1.5px solid #f0d0e8;
+  background: var(--sidebar-bg);
+  border: 1.5px solid var(--input-border);
   border-radius: 20px;
   padding: 4px 12px;
   cursor: pointer;
@@ -24,4 +24,4 @@
   color: var(--text);
   font-weight: 600;
 }
-.sep { color: #d8c0d8; }
+.sep { color: var(--input-border); }
